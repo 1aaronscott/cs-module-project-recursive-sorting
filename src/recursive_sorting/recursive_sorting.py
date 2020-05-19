@@ -33,17 +33,23 @@ def merge_sort(arr):
     # deal with lists of one or zero values
     if len(arr) <= 1:
         return arr
+
+    # split the input list into two roughly equal lists
     midpoint = floor(len(arr)/2)
     left = arr[:midpoint]
     right = arr[midpoint:]
-#    print(left, right)
+    # print(left, right)
+
+    # recursively sort each half
     left = merge_sort(left)
     right = merge_sort(right)
+
+    # join and return final sorted lists
     arr = merge(left, right)
     return arr
 
 
-print(merge_sort([1, 4, 6, 7, 0, 5, 2, 3, 9, 8]))
+#print(merge_sort([1, 4, 6, 7, 0, 5, 2, 3, 9, 8]))
 
 # implement an in-place merge sort algorithm
 
