@@ -1,4 +1,5 @@
 # TO-DO: complete the helper function below to merge 2 sorted arrays
+#import random
 from math import floor
 
 
@@ -13,10 +14,10 @@ def merge(arrA, arrB):
     while len(arrA) > 0 and len(arrB) > 0:
         if arrA[0] >= arrB[0]:
             merged_arr.append(arrB.pop(0))
-#            print(merged_arr)
+            print(merged_arr)
         else:
             merged_arr.append(arrA.pop(0))
-#            print(merged_arr)
+            print(merged_arr)
 
     # handle any leftover list elements
     while len(arrA) > 0:
@@ -50,6 +51,7 @@ def merge_sort(arr):
 
 
 #print(merge_sort([1, 4, 6, 7, 0, 5, 2, 3, 9, 8]))
+#print(merge_sort(random.sample(range(200), 50)))
 
 # implement an in-place merge sort algorithm
 
@@ -57,12 +59,27 @@ def merge_sort(arr):
 def merge_in_place(arr, start, mid, end):
     # Your code here
 
+    # Maintain two pointers which point to start of the segments which have to be merged.
+    # Compare the elements at which the pointers are present.
+    # If element1 < element2 then element1 is at right position, simply increase pointer1.
+    # Else place element2 in its right position and all the elements at the right of element2 will be shifted right by one position. Increment all the pointers by 1.
+    pointer1 = start+1
+    if arr[start] <= arr[pointer1]:
+        return arr
+
     return arr
 
 
 def merge_sort_in_place(arr, l, r):
     # Your code here
+    if len(arr) <= 1:
+        return arr
 
+    midpoint = floor((r-l)/2)
+    merge_sort_in_place(arr, l, midpoint)
+    merge_sort_in_place(arr, midpoint, r)
+
+    merge_in_place(arr, l, midpoint, r)
     return arr
 
 
