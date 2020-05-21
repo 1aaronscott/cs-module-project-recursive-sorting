@@ -82,9 +82,65 @@ def merge_sort_in_place(arr, l, r):
     merge_in_place(arr, l, midpoint, r)
     return arr
 
+##### Begin: Merge in place code from instructor/geeksforgeeks.org: #######################
+
+
+def merge_in_place(arr, start, mid, end):
+    # start2 is the first element in the right
+    # half of the list
+    start2 = mid + 1
+
+    # If the two halves we're merging are already
+    # sorted, no need to do anything
+    if arr[mid] <= arr[start2]:
+        return
+
+    # Two pointers to maintain start
+    # of both arrays to merge
+    while start <= mid and start2 <= end:
+
+        # If element 1 is in right place
+        if arr[start] <= arr[start2]:
+            start += 1
+
+        else:
+            value = arr[start2]
+            index = start2
+
+            # Shift all the elements between element 1
+            # element 2, right by 1.
+            while index != start:
+                arr[index] = arr[index - 1]
+                index -= 1
+
+            arr[start] = value
+
+            # Update all the pointers
+            start += 1
+            mid += 1
+            start2 += 1
+
+        # we don't return anything in in-place functions
+        # since we're directly mutating the input array
+
+
+def merge_sort_in_place(arr, l, r):
+    if l < r:
+        # Same as (l + r) / 2, but avoids overflow
+        # for large l and r
+        m = l + (r - l) // 2
+
+        # Sort first and second halves
+        merge_sort_in_place(arr, l, m)
+        merge_sort_in_place(arr, m + 1, r)
+
+        merge_in_place(arr, l, m, r)
+##### End: Merge in place code from instructor/geeksforgeeks.org: #######################
 
 # STRETCH: implement the Timsort function below
 # hint: check out https://github.com/python/cpython/blob/master/Objects/listsort.txt
+
+
 def timsort(arr):
     # Your code here
 
